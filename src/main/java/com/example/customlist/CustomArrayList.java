@@ -11,10 +11,20 @@ import java.util.NoSuchElementException;
  *
  * @param <E> the type of elements stored in the list
  */
-public class CustomArrayList<E extends Comparable<E>> implements CustomList<E> {
+public class CustomArrayList<E> implements CustomList<E> {
     private E[] elements;
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
+
+    private final Comparator<E> comparator = (o1, o2) -> {
+        if (o1.equals(o2)) {
+            return 0;
+        } else if (o1.hashCode() > o2.hashCode()) {
+            return 1;
+        } else {
+            return -1;
+        }
+    };
 
     /**
      * Creates a new CustomArrayList instance with the default initial capacity.
@@ -350,7 +360,7 @@ public class CustomArrayList<E extends Comparable<E>> implements CustomList<E> {
 
         int i = low;
         for (int j = low; j < high; j++) {
-            if (elements[j].compareTo(pivot) < 0) {
+            if (comparator.compare(elements[j], pivot) < 0) {
                 swap(i, j);
                 i++;
             }
