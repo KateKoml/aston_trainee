@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class CustomArrayList<E extends Comparable<E>> implements CustomList<E>{
+public class CustomArrayList<E extends Comparable<E>> implements CustomList<E> {
     private E[] elements;
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
