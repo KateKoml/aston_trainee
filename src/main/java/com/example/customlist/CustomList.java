@@ -1,6 +1,6 @@
 package com.example.customlist;
 
-public interface CustomList<E> extends Iterable<E>{
+public interface CustomList<E extends Comparable<E>> extends Iterable<E>{
     boolean isEmpty();
 
     int size();
@@ -24,6 +24,8 @@ public interface CustomList<E> extends Iterable<E>{
     void sort();
 
     void sortDescending();
+
+    void quicksort();
 
     E[] toArray();
 }

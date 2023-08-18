@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class CustomArrayList<E> implements CustomList<E> {
+public class CustomArrayList<E extends Comparable<E>> implements CustomList<E>{
     private E[] elements;
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
@@ -19,7 +19,7 @@ public class CustomArrayList<E> implements CustomList<E> {
         if (initSize < 0) {
             throw new IllegalArgumentException("illegal size:" + initSize);
         }
-        this.elements = (E[]) new Object[initSize];
+        this.elements = (E[]) new Comparable[initSize];
     }
 
     @Override
@@ -192,6 +192,44 @@ public class CustomArrayList<E> implements CustomList<E> {
             }
             return elements[current++];
         }
+    }
+
+    @Override
+    public void quicksort() {
+        quicksort(0, size - 1);
+    }
+
+    private void quicksort(int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(low, high);
+            quicksort(low, pivotIndex - 1);
+            quicksort(pivotIndex + 1, high);
+        }
+    }
+
+    private int partition(int low, int high) {
+        int mid = low + (high - low) / 2;
+        E pivot = elements[mid];
+
+        swap(mid, high);
+
+        int i = low;
+        for (int j = low; j < high; j++) {
+            if (elements[j].compareTo(pivot) < 0) {
+                swap(i, j);
+                i++;
+            }
+        }
+
+        swap(i, high);
+
+        return i;
+    }
+
+    private void swap(int i, int j) {
+        E temp = elements[i];
+        elements[i] = elements[j];
+        elements[j] = temp;
     }
 }
 

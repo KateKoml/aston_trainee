@@ -133,6 +133,16 @@ class CustomArrayListTest {
     }
 
     @Test
+    void testIndexOfNull() {
+        integerCustomList.add(1);
+        integerCustomList.add(2);
+        integerCustomList.add(null);
+        integerCustomList.add(7);
+
+        Assertions.assertEquals(2, integerCustomList.indexOf(null));
+    }
+
+    @Test
     void testSort() {
         integerCustomList.add(5);
         integerCustomList.add(3);
@@ -156,6 +166,20 @@ class CustomArrayListTest {
         String[] expected = {"pear", "orange", "banana", "apple"};
 
         Assertions.assertArrayEquals(expected, stringCustomList.toArray());
+    }
+
+    @Test
+    void testQuickSort() {
+        integerCustomList.add(5);
+        integerCustomList.add(3);
+        integerCustomList.add(7);
+        integerCustomList.add(1);
+        integerCustomList.add(10);
+        integerCustomList.quicksort();
+
+        Integer[] expected = {1, 3, 5, 7, 10};
+
+        Assertions.assertArrayEquals(expected, integerCustomList.toArray());
     }
 
 
