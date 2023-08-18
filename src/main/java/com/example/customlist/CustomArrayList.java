@@ -11,7 +11,6 @@ import java.util.NoSuchElementException;
  *
  * @param <E> the type of elements stored in the list
  */
-
 public class CustomArrayList<E extends Comparable<E>> implements CustomList<E> {
     private E[] elements;
     private int size;
@@ -324,7 +323,7 @@ public class CustomArrayList<E extends Comparable<E>> implements CustomList<E> {
     /**
      * Sorts the elements of this list using the quicksort algorithm in ascending order.
      *
-     * @param low the index of the first element of the partition to be sorted
+     * @param low  the index of the first element of the partition to be sorted
      * @param high the index of the last element of the partition to be sorted
      */
     private void quicksort(int low, int high) {
