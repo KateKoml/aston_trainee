@@ -16,16 +16,6 @@ public class CustomArrayList<E> implements CustomList<E> {
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
 
-    private final Comparator<E> comparator = (o1, o2) -> {
-        if (o1.equals(o2)) {
-            return 0;
-        } else if (o1.hashCode() > o2.hashCode()) {
-            return 1;
-        } else {
-            return -1;
-        }
-    };
-
     /**
      * Creates a new CustomArrayList instance with the default initial capacity.
      */
@@ -323,36 +313,40 @@ public class CustomArrayList<E> implements CustomList<E> {
     }
 
     /**
-     * Sorts this list into ascending order using the quicksort algorithm.
+     * Sorts the elements of the list in the order defined by the passed comparator.
+     *
+     * @param comparator the comparator that defines the order of sorting for the list elements
+     * @throws NullPointerException if the passed comparator is null
      */
     @Override
-    public void quicksort() {
-        quicksort(0, size - 1);
+    public void quicksort(Comparator<? super E> comparator) {
+        quicksort(comparator, 0, size - 1);
     }
 
     /**
-     * Sorts the elements of this list using the quicksort algorithm in ascending order.
+     * Recursive method for sorting the elements of the list in the order defined by the passed comparator.
      *
-     * @param low  the index of the first element of the partition to be sorted
-     * @param high the index of the last element of the partition to be sorted
+     * @param comparator the comparator that defines the order of sorting for the list elements
+     * @param low        the index of the first element in the list to be sorted
+     * @param high       the index of the last element in the list to be sorted
      */
-    private void quicksort(int low, int high) {
+    private void quicksort(Comparator<? super E> comparator, int low, int high) {
         if (low < high) {
-            int pivotIndex = partition(low, high);
-            quicksort(low, pivotIndex - 1);
-            quicksort(pivotIndex + 1, high);
+            int pivotIndex = partition(comparator, low, high);
+            quicksort(comparator, low, pivotIndex - 1);
+            quicksort(comparator, pivotIndex + 1, high);
         }
     }
 
     /**
-     * Partitions the elements of this list around a pivot element, such that all elements less than
-     * the pivot come before it and all elements greater than or equal to the pivot come after it.
+     * Method for partitioning the list into two parts relative to a pivot element.
      *
-     * @param low  the leftmost index of the partition
-     * @param high the rightmost index of the partition
-     * @return the final index of the pivot element
+     * @param comparator the comparator that defines the order of sorting for the list elements
+     * @param low        the index of the first element in the list to be partitioned
+     * @param high       the index of the last element in the list to be partitioned
+     * @return the index of the pivot element after partitioning the list
      */
-    private int partition(int low, int high) {
+    private int partition(Comparator<? super E> comparator, int low, int high) {
         int mid = low + (high - low) / 2;
         E pivot = elements[mid];
 

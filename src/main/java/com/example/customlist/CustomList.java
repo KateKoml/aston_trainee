@@ -1,5 +1,7 @@
 package com.example.customlist;
 
+import java.util.Comparator;
+
 public interface CustomList<E> extends Iterable<E> {
     boolean isEmpty();
 
@@ -25,7 +27,7 @@ public interface CustomList<E> extends Iterable<E> {
 
     void sortDescending();
 
-    void quicksort();
+    void quicksort(Comparator<? super E> comparator);
 
     E[] toArray();
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.UUID;
 
@@ -176,13 +177,16 @@ class CustomArrayListTest {
         integerCustomList.add(1);
         integerCustomList.add(5);
         integerCustomList.add(10);
-        integerCustomList.quicksort();
 
         stringCustomList.add("dj");
         stringCustomList.add("vk");
         stringCustomList.add("ap");
         stringCustomList.add("ap");
-        stringCustomList.quicksort();
+
+        Comparator<Integer> comparator = Integer::compare;
+        integerCustomList.quicksort(comparator);
+        Comparator<String> comparator1 = CharSequence::compare;
+        stringCustomList.quicksort(comparator1);
 
         Integer[] expected = {1, 3, 5, 5, 7, 10};
         String[] expectedS = {"ap", "ap", "dj", "vk"};
