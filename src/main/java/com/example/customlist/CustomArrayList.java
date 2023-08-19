@@ -17,9 +17,10 @@ public class CustomArrayList<E> implements CustomList<E> {
     private static final int DEFAULT_CAPACITY = 10;
 
     private final Comparator<E> comparator = (o1, o2) -> {
-        int hashCompare = Integer.compare(o1.hashCode(), o2.hashCode());
-        if (hashCompare == 0) {
-            return o1.equals(o2) ? 0 : 1;
+        if (o1.equals(o2)) {
+            return 0;
+        } else if (o1.hashCode() > o2.hashCode()) {
+            return 1;
         } else {
             return -1;
         }

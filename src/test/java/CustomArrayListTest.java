@@ -174,12 +174,21 @@ class CustomArrayListTest {
         integerCustomList.add(3);
         integerCustomList.add(7);
         integerCustomList.add(1);
+        integerCustomList.add(5);
         integerCustomList.add(10);
         integerCustomList.quicksort();
 
-        Integer[] expected = {1, 3, 5, 7, 10};
+        stringCustomList.add("dj");
+        stringCustomList.add("vk");
+        stringCustomList.add("ap");
+        stringCustomList.add("ap");
+        stringCustomList.quicksort();
+
+        Integer[] expected = {1, 3, 5, 5, 7, 10};
+        String[] expectedS = {"ap", "ap", "dj", "vk"};
 
         Assertions.assertArrayEquals(expected, integerCustomList.toArray());
+        Assertions.assertArrayEquals(expectedS, stringCustomList.toArray());
     }
 
 
